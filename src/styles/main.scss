@@ -1,0 +1,456 @@
+@use "./screens" as Screens;
+@use "./utils" as Utils;
+
+// Inputs reset
+button, input{
+    appearance: none;
+    text-decoration: none;
+    color: currentColor;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    background-color: rgb(var(--clr-fore-rgb) / .15);
+    backdrop-filter: blur(.125rem);
+}
+
+.icon {
+    color: currentColor;
+    stroke: currentColor;
+    fill: currentColor;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Desktop only elements */
+@include Screens.desktop {
+    .mobile-only {
+        display: none;
+    }
+}
+
+/* Mobile only elements */
+@include Screens.mobile {
+    .desktop-only {
+        display: none;
+    }
+}
+
+.btn {
+    outline: .125rem solid currentColor;
+    outline-offset: 0;
+    font-size: .85rem;
+    @include Screens.mobile {
+        font-size: 4vw;
+        @include Screens.md {
+            font-size: 2rem;
+        }
+    }
+    @include Screens.sm {
+        font-size: 1.25rem;
+    }
+    font-family: 'Poppins', serif;
+    color: var(--clr-main);
+    margin: .5rem;
+    padding: .125rem .5rem;
+    font-style: italic;
+    white-space: nowrap;
+    cursor: pointer;
+    @include Utils.transition($prop: (outline-offset color), $dur: .5s);
+    &.current, &:focus {
+        outline-offset: .25rem;
+        color: var(--clr-alt);
+    }
+    @include Screens.desktop {
+        &:hover, &:active {
+            outline-offset: .25rem;
+            color: var(--clr-alt);
+        }
+    }
+    &.no-outline {
+        outline: none !important;
+    }
+}
+
+.clr {
+    color: var(--clr-alt);
+    display: inline-block;
+    &-alt {
+        color: var(--clr-alt-low);
+    }
+    &.italic {
+        font-style: italic;
+    }
+}
+
+.nav-container {
+    position: absolute;
+    height: var(--page-height, 100%);
+    right: 1rem;
+    top: calc(100% - 3.125rem);
+    width: 0;
+    z-index: 10;
+
+    .buttons {
+        position: sticky;
+        top: 0;
+        left: -100%;
+        transform: translateX(-100%);
+        
+        &::before {
+            height: 75vh;
+            background-color: var(--clr-main);
+        }
+        &::after {
+            height: var(--scrolled, 100%);
+            background-color: var(--clr-alt);
+        }
+        
+        &::after, &::before {
+            position: absolute;
+            position: absolute;
+            width: .125rem;
+            right: -.5rem;
+            top: 0;
+            opacity: var(--bar-opacity, 0);
+            @include Utils.transition($prop: opacity);
+        }
+        > div { 
+            position: absolute;
+            right: 0;
+            // backdrop-filter: blur(2px);
+            display: flex;
+            flex-direction: row;
+        }
+    }
+}
+
+.image-selected {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgb(0 0 0 / .5);
+    z-index: 20;
+    display: grid;
+    place-items: center;
+    .close-button {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        padding: .5rem;
+        border-radius: 50%;
+        background-color: white;
+        color: black;
+    }
+    img {
+        max-width: 90%;
+        max-height: 90%;
+    }
+}
+
+.main-container {
+    background: linear-gradient(to bottom right, #001, #000, #001);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+section.home-section {
+    min-height: calc(100vh - 3rem);
+    height: max-content;
+    width: 100%;
+    padding: 1rem 0;
+    font-family: 'Poppins', serif;
+    scroll-margin-top: 3rem;
+
+    font-size: .75rem;
+    display: block;
+    @include Screens.desktop {
+        font-size: .9rem;
+        @include Screens.md {
+            font-size: 1rem;
+        }
+        @include Screens.lg {
+            font-size: 1.25rem
+        }
+    }
+    @include Screens.mobile {
+        font-size: 1rem;
+        @include Screens.sm {
+            font-size: 1.75rem;
+        }
+        @include Screens.lg {
+            font-size: 2.5rem;
+        }
+        @media (orientation: landscape) {
+            font-size: 1rem;
+        }
+    }
+    &#head {
+        height: 100vh;
+
+        .info-square {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            width: calc(100% - 2rem);
+            z-index: 10;
+            text-align: center;
+            font-weight: bolder;
+            white-space: nowrap;
+            font-size: 1em;
+
+            .role {
+                font-size: .7em;
+                font-style: italic;
+                font-weight: normal;
+            }
+
+            @include Screens.md {
+                height: 45%;
+            }
+
+            @include Screens.mobile {
+                width: calc(100% - 2rem);
+                margin-inline: auto;
+
+                @media (orientation: landscape) {
+                    width: 25%;
+                    height: calc(100% - 4rem);
+                }
+            }
+            @include Screens.desktop {
+                display: flex;
+                flex-direction: row;
+                place-items: center;
+                justify-content: center;
+                width: 65%;
+            }
+        
+            img {
+                border-radius: 50%;
+                aspect-ratio: 1 / 1;
+                max-width: 12rem;
+                max-height: 12rem;
+                display: block;
+                margin-inline: auto;
+                @include Screens.desktop {
+                    margin-inline: 2rem;
+                }
+                @include Screens.mobile {
+                    max-width: 65%;
+                }
+            }
+        }
+        .content {
+            position: absolute;
+            bottom: 3rem;
+            right: 0;
+            padding: 0 1rem;
+            max-width: calc(100% - 2rem);
+            width: max-content;
+            @include Screens.mobile {
+                width: calc(100% - 2rem);
+                bottom: 4rem;
+                
+                @media (orientation: landscape) {
+                    width: calc(75% - 2rem);
+                }
+            }
+        }
+    }
+    
+    &#about {
+        padding: 1rem;
+    
+        .content {
+            display: flex;
+            flex-grow: 1;
+            max-width: 100%;
+            z-index: 12;
+            align-items: center;
+            padding: .5rem;
+            
+            .profile {
+                width: 5rem;
+                aspect-ratio: 1/1;
+                border-radius: 50%;
+            }
+            .name-cont {
+                width: max-content;
+                // white-space: nowrap;
+                justify-items: center;
+                display: flex;
+                flex-direction: column;
+                padding: 0 1rem;
+
+                .name {
+                    font-weight: bolder;
+                }
+                .age {
+                    font-style: italic;
+                }
+                .role {
+                    font-weight: 100;
+                }
+            }
+            .info-cont {
+                padding: 2rem;
+                max-width: 100%;
+                @include Screens.mobile {
+                    @media (orientation: portrait) {
+                        padding: .5rem;
+                    }
+                }
+            }
+            [role="list"] {
+                list-style: square;
+                padding-left: 3rem;
+                width: max-content;
+                max-width: 100%;
+
+                li {
+                    list-style-type: none;
+                    cursor: default;
+                    position: relative;
+                    width: max-content;
+                    max-width: 100%;
+                    @include Utils.transition($prop: padding-left);
+
+                    &::after {
+                        height: .5em;
+                        top: .52em;
+                        position: absolute;
+                        left: 0;
+                        width: 0;
+                        @include Utils.transition($prop: width);
+
+                        background: linear-gradient(to right, var(--clr-alt), var(--clr-alt-low));
+                    }
+                    &::before {
+                        height: .5em;
+                        width: .5em;
+                        top: .52em;
+                        position: absolute;
+                        left: -1em;
+                        background-color: var(--clr-alt-low);
+                    }
+                    &:hover {
+                        padding-left: 2.25rem;
+                        &::after {
+                            width: 2rem;
+                        }
+                        span.description {
+                            opacity: .6;
+                        }
+                    }
+
+                    span.description {
+                        opacity: .1;
+                        margin-left: 1rem;
+                        @include Utils.transition($prop: opacity);
+                    }
+                }
+            }
+        }
+    }
+
+    &#work {
+        .content {
+            padding: 2rem;
+
+            .header {
+                font-size: 1.2em;
+            }
+            .project-list {
+                list-style: none;
+                display: grid;
+                height: max-content;
+
+                &::after, &::before {
+                    display: none;
+                }
+
+                --elements: 1;
+                @include Screens.sm {
+                    --elements: 2;
+                }
+                @include Screens.md {
+                    --elements: 3
+                }
+                @include Screens.xl {
+                    --elements: 4
+                }
+
+                grid-template-columns: repeat(var(--elements), 1fr);
+                grid-auto-rows: auto;
+                gap: .25rem;
+
+                .article {
+                    aspect-ratio: 10/9;
+                    padding: 0 1rem;
+                    display: flex;
+                    gap: 1rem;
+                    border-radius: 1em;
+                    float: left;
+                    flex-direction: column;
+                    background-color: rgb(255 255 255 / .125);
+
+                    @include Screens.sm {
+                        aspect-ratio: 5/6;
+                        max-width: 20rem;
+                    }
+                    
+                    .img-container {
+                        aspect-ratio: 16/9;
+                        width: 100%;
+                        background-color: #0003;
+                        overflow: hidden;
+                        border-radius: 1em;
+                        position: relative;
+                        
+                        img {
+                            min-width: 100%;
+                            height: 100%;
+                            float: left;
+                        }
+
+                        button {
+                            position: absolute;
+                            backdrop-filter: unset;
+                            padding: .25rem;
+                            background-color: rgb(0 0 0 / .25);
+                            border-radius: 50%;
+                            display: grid;
+                            place-items: center;
+                            left: 0;
+                            top: 0;
+                        }
+                    }
+
+                    .title {
+                        text-align: center;
+                        font-weight: bolder;
+                    }
+                    .description {
+                        font-size: .75em;
+                    }
+                }
+            }
+        }
+    }
+
+    &#contact {
+        display: grid;
+        place-items: center;
+        text-align: center;
+    }
+}

@@ -1,0 +1,29 @@
+@mixin transition($prop: all, $dur: 250ms, $timing: ease, $delay: 0) {
+    transition-property: $prop;
+    -o-transition-property: $prop;
+    -moz-transition-property: $prop;
+    -webkit-transition-property: $prop;
+
+    transition-duration: $dur;
+    -o-transition-duration: $dur;
+    -moz-transition-duration: $dur;
+    -webkit-transition-duration: $dur;
+
+    transition-delay: $delay;
+    -o-transition-delay: $delay;
+    -moz-transition-delay: $delay;
+    -webkit-transition-delay: $delay;
+
+    transition-timing-function: $timing;
+    -o-transition-timing-function: $timing;
+    -moz-transition-timing-function: $timing;
+    -webkit-transition-timing-function: $timing;
+
+    transition: $prop $dur $timing $delay;
+}
+@mixin linear-gradient($props: ()) {
+    background: -webkit-linear-gradient($props);
+    background: -moz-linear-gradient($props);
+    background: -o-linear-gradient($props);
+    background: linear-gradient($props);
+}

@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+:root {
+    --clr-main: #ffffff;
+    --clr-fore: #000000;
+    --clr-alt: #bb00aa;
+    --clr-fore-rgb: 0 0 0;
+    --clr-alt-low: #00aaff;
+}
+
+body {
+    font-family: 
+        -apple-system, 
+        BlinkMacSystemFont, 
+        'Segoe UI', 
+        'Roboto', 
+        'Oxygen',
+        'Ubuntu', 
+        'Cantarell', 
+        'Fira Sans', 
+        'Droid Sans', 
+        'Helvetica Neue',
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: var(--clr-main);
+    overflow: hidden;
+}
+html {
+    min-width: 360px;
+    overflow-x: auto;
+}
+
+code {
+    font-family: 
+        source-code-pro, 
+        Menlo, 
+        Monaco, 
+        Consolas, 
+        'Courier New',
+        monospace;
+}
+
+*, *::after, *::before {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+*::after, *::before {
+    content: '';
+    display: block;
+}
+
+span {
+    display: inline-block;
+}
